@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>stairs-wh (30).jpg</filename>
+	<path>C:\Users\limwu\Downloads\ALEX\Vision\ML_Model_and_Labelling\stairs-images\combined imgs\images\stairs-wh (30).jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>840</width>
+		<height>1232</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>upstairs</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>75</xmin>
+			<ymin>893</ymin>
+			<xmax>742</xmax>
+			<ymax>1232</ymax>
+		</bndbox>
+	</object>
+</annotation>
