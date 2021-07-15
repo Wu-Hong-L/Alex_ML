@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Staircase Images</folder>
+	<filename>stairs_29.jpg</filename>
+	<path>C:\Users\natha\Documents\Staircase Images\stairs_29.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>3024</width>
+		<height>4032</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>upstairs</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>677</xmin>
+			<ymin>2311</ymin>
+			<xmax>2855</xmax>
+			<ymax>3590</ymax>
+		</bndbox>
+	</object>
+</annotation>
