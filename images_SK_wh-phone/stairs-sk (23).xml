@@ -1,0 +1,26 @@
+<annotation>
+	<folder>stair_img_xml (SK)</folder>
+	<filename>stairs-sk (23).jpg</filename>
+	<path>C:\Users\limwu\Downloads\ALEX\Vision\ML_Model_and_Labelling\stairs-images\combined imgs\stair_img_xml (SK)\stairs-sk (23).jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>3000</width>
+		<height>4000</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>upstairs</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>606</xmin>
+			<ymin>1917</ymin>
+			<xmax>2593</xmax>
+			<ymax>4000</ymax>
+		</bndbox>
+	</object>
+</annotation>
