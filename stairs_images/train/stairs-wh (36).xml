@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>stairs-wh (36).jpg</filename>
+	<path>C:\Users\limwu\Downloads\ALEX\Vision\ML_Model_and_Labelling\alex_github\Alex_ML\stairs_images\train\stairs-wh (36).jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1200</width>
+		<height>675</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>upstairs</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>239</xmin>
+			<ymin>416</ymin>
+			<xmax>940</xmax>
+			<ymax>671</ymax>
+		</bndbox>
+	</object>
+</annotation>
