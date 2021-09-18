@@ -1,0 +1,11 @@
+#!/bin/bash
+
+module purge
+module load fosscuda/2019b
+module load cudnn/7.6.4.38
+module load opencv/4.3.0-python-3.7.4
+module load tensorflow/2.3.1-python-3.7.4
+
+python generate_tfrecord.py -x /data/gpfs/projects/punim1425/wh/Tensorflow/workspace/images/train/ -l /data/gpfs/projects/punim1425/wh/Tensorflow/workspace/annotations/label_map.pbtxt -o /data/gpfs/projects/punim1425/wh/Tensorflow/workspace/annotations/train.record
+
+python generate_tfrecord.py -x /data/gpfs/projects/punim1425/wh/Tensorflow/workspace/images/test/ -l /data/gpfs/projects/punim1425/wh/Tensorflow/workspace/annotations/label_map.pbtxt -o /data/gpfs/projects/punim1425/wh/Tensorflow/workspace/annotations/test.record

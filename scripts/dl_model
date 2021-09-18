@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Load modules required to use tensorflow in update_config.py script below
+module load fosscuda/2019b
+module load tensorflow/2.3.1-python-3.7.4
+
+# Required files: create_directories_tflabel.py update_config.py
+
+# PRETRAINED_MODEL_NAME='ssd_resnet50_v1_fpn_1024x1024_coco17_tpu-8'
+# PRETRAINED_MODEL_NAME='faster_rcnn_resnet101_v1_1024x1024_coco17_tpu-8'
+# PRETRAINED_MODEL_NAME='efficientdet_d3_coco17_tpu-32'
+# PRETRAINED_MODEL_NAME='centernet_hg104_512x512_coco17_tpu-8'
+# PRETRAINED_MODEL_NAME='centernet_resnet101_v1_fpn_512x512_coco17_tpu-8'
+# PRETRAINED_MODEL_NAME='ssd_resnet101_v1_fpn_640x640_coco17_tpu-8'
+# PRETRAINED_MODEL_NAME='ssd_resnet50_v1_fpn_640x640_coco17_tpu-8'
+# PRETRAINED_MODEL_NAME='centernet_resnet50_v1_fpn_512x512_coco17_tpu-8'
+PRETRAINED_MODEL_NAME='efficientdet_d1_coco17_tpu-32'
+
+# PRETRAINED_MODEL_URL='https://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_1024x1024_coco17_tpu-8.tar.gz'
+# PRETRAINED_MODEL_URL='http://download.tensorflow.org/models/object_detection/tf2/20200711/faster_rcnn_resnet101_v1_1024x1024_coco17_tpu-8.tar.gz'
+# PRETRAINED_MODEL_URL='http://download.tensorflow.org/models/object_detection/tf2/20200711/efficientdet_d3_coco17_tpu-32.tar.gz'
+# PRETRAINED_MODEL_URL='http://download.tensorflow.org/models/object_detection/tf2/20200713/centernet_hg104_512x512_coco17_tpu-8.tar.gz'
+# PRETRAINED_MODEL_URL='http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_resnet101_v1_fpn_512x512_coco17_tpu-8.tar.gz'
+# PRETRAINED_MODEL_URL='http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet101_v1_fpn_640x640_coco17_tpu-8.tar.gz'
+# PRETRAINED_MODEL_URL='http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz'
+# PRETRAINED_MODEL_URL='http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_resnet50_v1_fpn_512x512_coco17_tpu-8.tar.gz'
+PRETRAINED_MODEL_URL='http://download.tensorflow.org/models/object_detection/tf2/20200711/efficientdet_d1_coco17_tpu-32.tar.gz'
+
+PRETRAINED_MODEL_PATH='Tensorflow/workspace/pre-trained-models/'
+
+tarname='.tar.gz'
+
+pwd=$(pwd)
+
+# Creating Directories
+python create_directories_tflabel.py $PRETRAINED_MODEL_NAME
+
+# Downloading Pre-trained model and un-tar the model
+wget --no-check-certificate $PRETRAINED_MODEL_URL
+mv $PRETRAINED_MODEL_NAME$tarname $PRETRAINED_MODEL_PATH
+cd $PRETRAINED_MODEL_PATH
+tar -zxvf $PRETRAINED_MODEL_NAME$tarname
+
+# Changing back to original working directory 
+cd $pwd
+
+# Copying config file and amending
+cp ${PRETRAINED_MODEL_PATH}${PRETRAINED_MODEL_NAME}/pipeline.config Tensorflow/workspace/models/my_$PRETRAINED_MODEL_NAME/
+python update_config.py $PRETRAINED_MODEL_NAME
+
+# Echo train and eval commands into a .txt file
+TRAIN_SCRIPT_PATH='Tensorflow/models/research/object_detection/model_main_tf2.py'
+CKPT_PATH="Tensorflow/workspace/models/my_$PRETRAINED_MODEL_NAME/"
+PIPELINE_CFG_PATH="Tensorflow/workspace/models/my_$PRETRAINED_MODEL_NAME/pipeline.config"
+
+train_command="python ${TRAIN_SCRIPT_PATH} --model_dir=${CKPT_PATH} --pipeline_config_path=$PIPELINE_CFG_PATH --num_train_steps=2000"
+eval_command="python $TRAIN_SCRIPT_PATH --model_dir=$CKPT_PATH --pipeline_config_path=$PIPELINE_CFG_PATH --checkpoint_dir=$CKPT_PATH"
+
+echo $train_command > $PRETRAINED_MODEL_NAME-train-eval-commands.txt
+echo $eval_command >> $PRETRAINED_MODEL_NAME-train-eval-commands.txt
+
