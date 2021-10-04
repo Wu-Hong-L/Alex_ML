@@ -6,6 +6,13 @@ This repository details some image dataset and basic scripts in training a machi
 
 [Todo: navigating in spartan]
 
+## Feature Extraction
+
+This repository contains the scripts to detect staircases real-time using Intel RealSense D435i depth camera and calculate its tread and riser. 
+
+## RGB-D Images Dataset
+
+This repository contains RGB-D images of staircases for static feature extraction tests.
 
 
 
