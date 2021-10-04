@@ -1,11 +1,6 @@
 # Alex_ML - Stair Images Dataset, Basic Scripts for [Spartan](https://dashboard.hpc.unimelb.edu.au/), Simple Linux Commands and Spartan Commands
 This repository details some image dataset and basic scripts in training a machine learning model using TensorFlow 2(TF2) and the TensorFlow2 Object Detection API.
 
-## ToDo
-[Todo: Instructions]
-
-[Todo: navigating in spartan]
-
 ## Feature Extraction
 
 This repository contains the scripts to detect staircases real-time using Intel RealSense D435i depth camera and calculate its tread and riser. <br><br>
