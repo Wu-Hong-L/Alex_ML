@@ -8,7 +8,11 @@ This repository details some image dataset and basic scripts in training a machi
 
 ## Feature Extraction
 
-This repository contains the scripts to detect staircases real-time using Intel RealSense D435i depth camera and calculate its tread and riser. 
+This repository contains the scripts to detect staircases real-time using Intel RealSense D435i depth camera and calculate its tread and riser. <br><br>
+Libraries Required:
+1. Open3D 0.13.0
+2. Tensorflow >=2.0
+3. Numpy 
 
 ## RGB-D Images Dataset
 
