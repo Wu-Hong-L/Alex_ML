@@ -1,5 +1,6 @@
-# Alex_ML - Stair Images Dataset, Basic Scripts for [Spartan](https://dashboard.hpc.unimelb.edu.au/), Simple Linux Commands and Spartan Commands
-This repository details some image dataset and basic scripts in training a machine learning model using TensorFlow 2(TF2) and the TensorFlow2 Object Detection API.
+# ALEX: Detecting Environmental Constraints towards Fluid Exoskeleton Gait (M-12-FJUS-051)
+
+## Section 1: Feature Extraction
 
 ## Feature Extraction
 
@@ -13,7 +14,8 @@ Libraries Required:
 
 This repository contains RGB-D images of staircases for static feature extraction tests.
 
-
+## Section 2: Stair Images Dataset, Basic Scripts for [Spartan](https://dashboard.hpc.unimelb.edu.au/), Simple Linux Commands and Spartan Commands
+This repository details some image dataset and basic scripts in training a machine learning model using TensorFlow 2(TF2) and the TensorFlow2 Object Detection API.
 
 ## Stair Images Dataset
 
