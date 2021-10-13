@@ -14,17 +14,17 @@ Libraries Required:
 
 This repository contains RGB-D images of staircases for static feature extraction tests.
 
-## Section 2: Stair Images Dataset, Basic Scripts for [Spartan](https://dashboard.hpc.unimelb.edu.au/), Simple Linux Commands and Spartan Commands
-This repository details some image dataset and basic scripts in training a machine learning model using TensorFlow 2(TF2) and the TensorFlow2 Object Detection API.
+## Section 2: Training a Machine Learning Model on [Spartan](https://dashboard.hpc.unimelb.edu.au/)
+This repository details some stairs image data set and basic scripts in training a machine learning model using TensorFlow 2(TF2) and the TensorFlow2 Object Detection (TFOD) API on Spartan (Linux). There are also some helpful simple linux commands and spartan-specific commands as a refresher.
 
 ## Stair Images Dataset
 
 This repository contains stair images along with their xml files (train and test sets) for machine learning object detection using TensorFlow Object Detection API.
-Train set: 231 images
-Test set: 25 images
+- Train set: 231 images
+- Test set: 25 images
 
 
-## Spartan Scripts
+## Data Preparation Scripts Created to Run On Spartan (Linux)
 
 List of scripts:
 
@@ -44,19 +44,43 @@ List of scripts:
 
 [NOTE: It is required for the user to change all of the path directories in the scripts appropriately to your own path directories.]
 
-The following instructions build upon pre-requisite knowledge and directory setup following this [YouTube Video](https://www.youtube.com/watch?v=yqkISICHH-U&t=14199s) [Credits to Nicholas Renotte]. Furthermore, it assumes access to Unimelb's High Performance Computing (HPC) System - Spartan.
+The following instructions build upon pre-requisite knowledge on installing the TFOD API along with its necessary dependency libraries (TF2, COCO API) and directory setup following this [YouTube Video](https://www.youtube.com/watch?v=yqkISICHH-U&t=14199s) [Credits to Nicholas Renotte]. Furthermore, it assumes access to Unimelb's High Performance Computing (HPC) System - Spartan.
 
-Copy train and test directory into ```Tensorflow/workspace/images/```
+The first step is to navigate to a selected directory of choice (this will be the root directory) and copy ```create_directories_tflabel.py```, ```update_config.py```, ```dl_model``` from the ```scripts``` directory in this repository.
 
-Copy contents of ```scripts``` directory in this repository into ```Tensorflow/scripts/```
+Then, ```nano``` the ```dl_model``` file and change the ```PRETRAINED_MODEL_NAME``` and ```PRETRAINED_MODEL_URL``` corresponding to the pre-trained model of choice that you want to download from the [TensorFlow 2 Detection Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md). The ```PRETRAINED_MODEL_NAME``` will be your directory name for the pre-trained model in ```Tensorflow/workspace/pre-trained-models/``` (the folder hierarchy is shown below).
 
-Cd into ```scripts``` directory Make TF records by running
+Next, run the script with
+```
+sh dl_model
+```
+This sets up the directories nicely and the structure should look like this:    
+```
+Tensorflow/
+    └─ models/
+    └─ protoc/
+    └─ scripts/    
+    └─ workplace/
+       ├─ annotations/
+       ├─ images/
+       ├─ models/
+       └─ pre-trained-models/
+```
+We will only work with the ```scripts``` and ```workplace``` directories, as ```models``` and ```protoc``` would contain the TFOD files after installation, which will not be covered. [Here](https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html#tensorflow-object-detection-api-installation) is a tutorial for that.
+
+Next, copy the train and test directory (containing train and test images & XML files respectively) from this repository into ```Tensorflow/workspace/images/```
+
+Then, copy ```create_tfrecords``` and ```generate_tfrecord.py``` from the ```scripts``` directory in this repository into ```Tensorflow/scripts/```
+
+Cd into ```scripts``` directory, and make the TFRecord (.record) files by running
 ```
 sh create_tfrecords
 ```
+This creates the train.record and test.record files.
 
-Copy the scripts ```dl_model``` ```create_directories_tflabel.py``` ```update_config.py``` into the same directory that contains the TensorFlow directory.
+The next step is to check the ```pipeline.config``` file in ```Tensorflow/workspace/pre-trained-models/[pre trained model of choice]``` to ensure if it is correct. Note that the ```update_config.py``` files work would for the ssd models, and likely not work for some other models. Hence, it is encouraged to change the config file manually.
 
+Finally, the training can commence. A [pre trained model name].txt file was generated, and echoing its contents would give the command line instructions to train the model.
 
 
 ## Helpful Linux Commands
@@ -65,7 +89,6 @@ Copy the scripts ```dl_model``` ```create_directories_tflabel.py``` ```update_co
 ```
 mv -t [dest] [file1] [file2] [file3]
 ```
-
 
 
 ## Helpful Spartan Server Commands
